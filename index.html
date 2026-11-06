@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Business Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <h2> Studio<span></span></h2>
+                <p>Business Workspace</p>
+            </div>
+
+            <nav>
+                <p class="menu-label">WORKSPACE</p>
+                <a href="#dashboard" class="nav-link active">▦ Dashboard</a>
+                <a href="#clients" class="nav-link">♧ Clients</a>
+                <a href="#projects" class="nav-link">▤ Projects</a>
+                <a href="#invoices" class="nav-link">▧ Invoices</a>
+
+                <p class="menu-label">MANAGEMENT</p>
+                <a href="#income" class="nav-link">↗ Income & Expenses</a>
+                <a href="#planner" class="nav-link">□ Planner</a>
+                <a href="#analytics" class="nav-link">▥ Analytics</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>YOUR BUSINESS</p>
+                <h3>Make it happen.</h3>
+                <small>One step at a time.</small>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">FRIDAY, YOUR WORKSPACE</P>
+                <h1> Good  afternoon.</h1>
+                <p class="subtitle">Here's what's happening with your business.</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar"></div>
+                <span>My Workspace</span>
+            </div>
+        </header>
+
+        <section class="overview">
+            <div class="section-heading">
+                <div>
+                    <h2>Business overview</h2>
+                    <p>A quick look at your business performance.</p>
+                </div>
+                <select class="period" id="period-filter" onchange="updateDashboard()">
+                    <option value="week">This Week</option>
+                    <option value="month" selected>This Month</option>
+                    <option value="year">This Year</option>
+                    <option value="all">All Time</option>
+                </select>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <p>Total revenue</p>
+                    <h2>$0.00</h2>
+                    <small>↗ Your total earnings</small>
+                </div>
+
+                <div class="stat-card">
+                    <p>Active projects</p>
+                    <h2>0</h2>
+                    <small>Project in progress</small>
+                </div>
+
+                <div class="stat-card">
+                    <p>Total clients</p>
+                    <h2>0</h2>
+                    <small>Your clients network</small>
+                </div>
+
+                <div class="stat-card">
+                    <p>Pending invoices</p>
+                    <h2>$0.00</h2>
+                    <small>Awaiting payment</small>
+                </div>
+            </div>
+        </section>
+
+        
+<section class="panel project-form" id="project-form" style="display: none;">
+    <div class="panel-heading">
+        <div>
+            <h2>Add a new project</h2>
+            <p>Enter your project details below.</p>
+        </div>
+    </div>
+
+    <form id="new-project-form">
+        <label>Project name</label>
+        <input type="text" id="project-name" placeholder="e.g. Website Design" required>
+
+        <label>Client name</label>
+        <input type="text" id="client-name" placeholder="e.g. Sarah Johnson" required>
+
+        <label>Project fee (USD)</label>
+        <input type="number" id="project-fee" placeholder="e.g. 250" min="0" required>
+
+        <label>Deadline</label>
+        <input type="date" id="project-deadline" required>
+
+        <div class="form-buttons">
+            <button type="submit">Save project</button>
+            <button type="button" class="cancel-button" onclick="closeProjectForm()">Cancel</button>
+        </div>
+    </form></section>
+
+        
+<section class="panel client-section" id="clients">
+
+    <div class="panel-heading">
+        <div>
+            <h2>Client Management</h2>
+            <p>Manage and organize your client relationships.</p>
+        </div>
+
+        <button onclick="openClientForm()">+ Add client</button>
+    </div>
+
+    <div id="client-form" style="display: none;">
+        <form id="new-client-form">
+
+            <label>Client name</label>
+            <input type="text" id="new-client-name"
+                placeholder="e.g. Amanda Johnson" required>
+
+            <label>Email address</label>
+            <input type="email" id="new-client-email"
+                placeholder="e.g. amanda@email.com" required>
+
+            <label>Company / Business</label>
+            <input type="text" id="new-client-company"
+                placeholder="e.g. Amanda Studio">
+
+            <label>Phone number</label>
+            <input type="tel" id="new-client-phone"
+                placeholder="e.g. +62 812...">
+
+            <div class="form-buttons">
+                <button type="submit">Save client</button>
+                <button type="button" class="cancel-button"
+                    onclick="closeClientForm()">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="client-list">
+        <div class="empty-state">
+            <div class="empty-icon">♧</div>
+            <h3>No clients yet</h3>
+            <p>Your clients will appear here once you add them.</p>
+        </div>
+    </div>
+
+</section>
+
+        <section class="content-grid">
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Recent projects</h2>
+                        <p>Keep track of your ongoing work</p>
+                    </div>
+                    <a href="#">View all</a>
+                </div>
+
+                <div id="project-list">
+                    <div class="empty-state" id="empty-project">
+                        <div class="empty-icon">▤</div>
+                        <h3>No projects yet</h3>
+                        <p>Your projects will appear here once you add them.</p>
+                        <button onclick="openProjectForm()">Add your first project</button>
+                    </div>
+                </div>
+            </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Upcoming tasks</h2>
+                            <p>Your next things to do.</p>
+                        </div>
+                        <a href="#">View all</a>
+                    </div>
+
+                    <div class="empty-state">
+                        <div class="empty-icon">🟊</div>
+                        <h3>Nothing scheduled</h3>
+                        <p>Your upcoming tasks will appear here.</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <footer>
+                <p>🟊2026 Studio. All rights reserved.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
